@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: station-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: station-service
+  template:
+    metadata:
+      labels:
+        app: station-service
+    spec:
+      containers:
+        - name: station-service
+          image: rishi0404/ev-charging-app-station-service:latest
+          imagePullPolicy: Always  
+          ports:
+            - containerPort: 5000
+          env:
+            - name: DB_HOST
+              value: postgres
+            - name: DB_NAME
+              value: evcharging
+            - name: DB_USER
+              value: postgres
+            - name: DB_PASSWORD
+              value: postgres
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: station-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: station-service
+  ports:
+    - port: 5000
+      targetPort: 5000
+

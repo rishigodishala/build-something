@@ -1,0 +1,53 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:14
+    container_name: ev-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: evcharging
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  station-service:
+    build: ./station-service
+    image: rishi0404/ev-charging-app-station-service:latest
+    container_name: station-service
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/evcharging
+    ports:
+      - "5002:5000"
+    depends_on:
+      - postgres
+
+  user-service:
+    build: ./user-service
+    image: rishi0404/ev-charging-app-user-service:latest
+    container_name: user-service
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/evcharging
+    ports:
+      - "5001:5001"
+    depends_on:
+      - postgres
+
+  ev-frontend:
+    build:
+      context: ./ev-frontend
+      args:
+        - REACT_APP_STATION_API=http://localhost:5002
+        - REACT_APP_USER_API=http://localhost:5001
+    image: rishi0404/ev-charging-app-frontend:latest
+    container_name: ev-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - station-service
+      - user-service
+
+volumes:
+  postgres_data:
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="EV Charging Stations Frontend"
+    />
+    <title>EV Charging App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root">
+      <header>
+        <h1>EV Charging Stations</h1>
+      </header>
+
+      <section id="search-section">
+        <h2>Search Stations</h2>
+        <input type="text" id="location-input" placeholder="Enter location (e.g., Stockholm)" />
+        <button onclick="searchStations()">Search</button>
+        <div id="search-results"></div>
+      </section>
+
+      <section id="stations-section">
+        <h2>All Stations</h2>
+        <button onclick="loadStations()">Load Stations</button>
+        <div id="stations-list"></div>
+      </section>
+
+      <section id="add-station-section">
+        <h2>Add Station</h2>
+        <form id="add-station-form">
+          <input type="text" id="station-name" placeholder="Station Name" required />
+          <input type="text" id="station-location" placeholder="Location" required />
+          <input type="number" id="station-capacity" placeholder="Capacity" required min="1" />
+          <input type="number" id="station-available" placeholder="Available Slots" required min="0" />
+          <button type="submit">Add Station</button>
+        </form>
+      </section>
+
+      <section id="booking-section">
+        <h2>Book a Station</h2>
+        <input type="text" id="user-name" placeholder="Your Name" required />
+        <select id="station-select"></select>
+        <button onclick="bookStation()">Book</button>
+        <div id="booking-result"></div>
+      </section>
+
+      <section id="bookings-section">
+        <h2>My Bookings</h2>
+        <button onclick="loadBookings()">Load Bookings</button>
+        <div id="bookings-list"></div>
+      </section>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
