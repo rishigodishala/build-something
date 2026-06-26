@@ -21,8 +21,10 @@ The repository is structured around core backend services:
 2. User Service: Manages user authentication, driver profiles, and access control.
 3. Transaction/Billing Service: Handles real-time coordination of charging sessions, tracking duration, and processing transaction data.
 
- Tech Stack
 
-* Backend Language: Python
-* Database: PostgreSQL
-* Architectural Style:RESTful Microservices
+
+Technology Breakdown
+* Frontend Ecosystem (56.7%): JavaScript, HTML5, CSS3 (Built for user interfaces and live telemetry dashboards)
+* Backend Core (20.4%): Python 3.x (Powering the microservices, business logic, and API routes)
+* Database Layer: PostgreSQL (Relational management ensuring ACID compliance and transaction safety)
+* DevOps & Infrastructure (6.3%): Docker / Dockerfile (Containerization for seamless, environment-agnostic deployment)
